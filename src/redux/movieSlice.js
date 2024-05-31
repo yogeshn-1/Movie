@@ -9,8 +9,10 @@ const initialState = {
 
 export const fetchMovies = createAsyncThunk("fetchMovies", async () => {
   const res = await fetch(import.meta.env.VITE_BASEURL);
-  const mov = await res.json();
-  return mov;
+  const movie = await res.json();
+  movie.sort((movA, movB) => movB.rating - movA.rating);
+  movie.forEach((mov) => (mov.isFav = false));
+  return movie;
 });
 
 const movieSlice = createSlice({
@@ -18,11 +20,17 @@ const movieSlice = createSlice({
   initialState,
   reducers: {
     favourite: (state, action) => {
-      state.favMovies.push(action.payload);
+      state.movies.forEach((mov) => {
+        mov.id === action.payload.id ? (mov.isFav = true) : mov;
+      });
+      state.favMovies.push({ ...action.payload, isFav: true });
     },
     unfavourite: (state, action) => {
       state.favMovies = state.favMovies.filter(
         (mov) => mov.id !== action.payload
+      );
+      state.movies.forEach((mov) =>
+        mov.id === action.payload ? (mov.isFav = false) : mov
       );
     },
   },
