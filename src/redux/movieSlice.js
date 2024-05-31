@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   movies: null,
+  favMovies: [],
   isLoading: false,
   error: false,
 };
@@ -16,8 +17,14 @@ const movieSlice = createSlice({
   name: "movies",
   initialState,
   reducers: {
-    favourite: (state, action) => {},
-    unfavourite: (state, action) => {},
+    favourite: (state, action) => {
+      state.favMovies.push(action.payload);
+    },
+    unfavourite: (state, action) => {
+      state.favMovies = state.favMovies.filter(
+        (mov) => mov.id !== action.payload
+      );
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchMovies.pending, (state, action) => {
