@@ -1,18 +1,12 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchMovies } from "../redux/movieSlice";
+import { useSelector } from "react-redux";
 import Loader from "./Loading";
 import MovieCard from "./MovieCard";
 
 const Movies = () => {
   const movie = useSelector((state) => state.movies);
   const isLoading = useSelector((state) => state.isLoading);
-  const dispatch = useDispatch();
   const error = useSelector((state) => state.error);
-  useEffect(() => {
-    dispatch(fetchMovies());
-    console.log(movie);
-  }, []);
   return isLoading ? (
     <Loader />
   ) : (
@@ -23,8 +17,7 @@ const Movies = () => {
           Some error occured during fetch movie api call
         </div>
       )}
-      {movie &&
-        movie.map((mov) => <MovieCard movie={mov} key={mov.id} fav={false} />)}
+      {movie && movie.map((mov) => <MovieCard movie={mov} key={mov.id} />)}
     </main>
   );
 };
