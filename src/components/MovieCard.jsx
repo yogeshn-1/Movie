@@ -19,13 +19,13 @@ const MovieCard = ({ movie }) => {
           <img
             src={poster}
             alt={movie.image}
-            className="h-[100px] xs:w-[150px]"
+            className="h-[100px] xs:w-[200px] xs:h-auto"
           />
-          <div className="flex flex-col gap-2 xs:gap-1">
-            <h3 className="border-b xs:text-base sm:text-base text-lg">
+          <div className="flex flex-col gap-2 xs:gap-1 ">
+            <h3 className=" xs:text-base sm:text-base text-lg font-semibold ">
               {movie.movie}
             </h3>
-            <p className="border-b xs:text-base  sm:text-base text-lg">
+            <p className=" xs:text-base  sm:text-base text-lg">
               IMDb Rating : {movie.rating}
             </p>
           </div>
