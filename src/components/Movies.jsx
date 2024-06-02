@@ -10,8 +10,10 @@ const Movies = () => {
   return isLoading ? (
     <Loader />
   ) : (
-    <main className="mx-auto p-4 h-full bg-slate-100 ">
-      <h2 className="text-center text-3xl font-bold font-sans">All Movies</h2>
+    <main className="mx-auto p-4 h-full max-w-5xl ">
+      <h2 className="text-center text-3xl font-bold font-sans m-2">
+        All Movies
+      </h2>
       {error && (
         <div className="text-red-700 text-xl text-center">
           Some error occured during fetch movie api call
